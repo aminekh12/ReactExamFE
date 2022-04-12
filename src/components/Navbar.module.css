@@ -1,0 +1,25 @@
+.nav {
+    line-height: 100px;
+}
+
+.logo {
+    height: 80px;
+    margin: 20px 50px;
+}
+
+.right {
+    float: right;
+}
+
+.btn1 {
+    background: #4a3aff;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 50px;
+    padding: 15px 30px;
+    margin: 30px 50px;
+  }
+  .btn1:hover {
+    background: #5d4eff;
+  }
