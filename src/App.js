@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react'
-import Homepage from './components/Homepage'
+import FormHolder from './components/FormHolder'
 import Navbar from './components/Navbar';
 import Form from './components/Form';
+import Salles from "./components/Salles";
 
 function App() {
   return (
     <Fragment>
       <Navbar />
-      <Form />
-      {/* <Homepage /> */}
+      <FormHolder />
     </Fragment>
   );
 }
