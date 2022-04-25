@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Homepage.module.css";
 
-import { Form, Input, Button, Select, Space,InputNumber } from 'antd';
+import { Form, Input, Button, Select, Space, InputNumber } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 const formItemLayout = {
     labelCol: {
@@ -54,11 +54,11 @@ function Matiers(props) {
                                             <Select.Option value="filiers">normale</Select.Option>
                                         </Select>
                                     </Form.Item>
-                                    <Form.Item  className={styles.dropboxprof}>
-                                    <Select placeholder="Professeur :">
-                                        <Select.Option value="filiers">niveau 12</Select.Option>
-                                    </Select>
-                                </Form.Item>
+                                    <Form.Item className={styles.dropboxprof}>
+                                        <Select placeholder="Professeur :">
+                                            <Select.Option value="filiers">niveau 12</Select.Option>
+                                        </Select>
+                                    </Form.Item>
 
                                     <MinusCircleOutlined onClick={() => remove(name)} className={styles.dynamic_delete_button} />
                                 </Space>
@@ -73,7 +73,7 @@ function Matiers(props) {
                 </Form.List>
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
-                    Insérer
+                        Insérer
                     </Button>
                 </Form.Item>
             </Form>

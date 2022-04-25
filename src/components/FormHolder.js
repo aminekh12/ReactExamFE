@@ -7,9 +7,14 @@ import Niveaux from "./Niveaux";
 import Matieres from "./Matieres";
 import Professeurs from "./Professeurs";
 import Salles from "./Salles";
+import Classes from "./Classes";
 
 const { Step } = Steps;
 const steps = [
+  {
+    title: 'Professeurs',
+    content: 'Last-content',
+  },
   {
     title: 'filieres',
     content: 'filieres',
@@ -19,11 +24,11 @@ const steps = [
     content: 'Second-content',
   },
   {
-    title: 'Professeurs',
+    title: 'Matieres',
     content: 'Last-content',
   },
   {
-    title: 'Matieres',
+    title: 'Classes',
     content: 'Last-content',
   },
   {
@@ -32,18 +37,19 @@ const steps = [
   },
 ];
 function FormHolder(props) {
-  const FormTitles = ["Filliers", "Niveaux", "Matieres", "Classes", "Professeurs"];
   const [current, setCurrent] = React.useState(0);
   const PageDisplay = () => {
     if (current === 0) {
-      return <Filieres />;
-    } else if (current === 1) {
-      return <Niveaux />;
-    } else if (current === 2) {
       return <Professeurs />;
+    } else if (current === 1) {
+      return <Filieres />;
+    } else if (current === 2) {
+      return <Niveaux />;
     } else if (current === 3) {
       return <Matieres />;
-    } else if (current === 4) {
+    }else if (current === 4) {
+      return <Classes />;
+    } else if (current === 5) {
       return <Salles />;
     }
   };
