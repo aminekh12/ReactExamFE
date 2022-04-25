@@ -54,11 +54,11 @@ function Matiers(props) {
                                             <Select.Option value="filiers">normale</Select.Option>
                                         </Select>
                                     </Form.Item>
-                                    <Form.Item
-                                        {...formItemLayout}
-                                    >
-                                        <InputNumber placeholder="places" min={1}  />
-                                    </Form.Item>
+                                    <Form.Item  className={styles.dropboxprof}>
+                                    <Select placeholder="Professeur :">
+                                        <Select.Option value="filiers">niveau 12</Select.Option>
+                                    </Select>
+                                </Form.Item>
 
                                     <MinusCircleOutlined onClick={() => remove(name)} className={styles.dynamic_delete_button} />
                                 </Space>

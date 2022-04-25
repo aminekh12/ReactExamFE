@@ -26,7 +26,7 @@ function Salles(props) {
   return (
 
     <div className={styles.container}>
-      <div className="display-5 text-center  text-secondary" >Menu des matières</div>
+      <div className="display-5 text-center  text-secondary" >Menu des salles</div>
 
       <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off">
         <Form.List name="users">

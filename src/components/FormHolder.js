@@ -19,11 +19,11 @@ const steps = [
     content: 'Second-content',
   },
   {
-    title: 'Matieres',
+    title: 'Professeurs',
     content: 'Last-content',
   },
   {
-    title: 'Professeurs',
+    title: 'Matieres',
     content: 'Last-content',
   },
   {
@@ -40,9 +40,9 @@ function FormHolder(props) {
     } else if (current === 1) {
       return <Niveaux />;
     } else if (current === 2) {
-      return <Matieres />;
-    } else if (current === 3) {
       return <Professeurs />;
+    } else if (current === 3) {
+      return <Matieres />;
     } else if (current === 4) {
       return <Salles />;
     }
