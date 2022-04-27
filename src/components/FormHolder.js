@@ -7,7 +7,7 @@ import Niveaux from "./Niveaux";
 import Matieres from "./Matieres";
 import Professeurs from "./Professeurs";
 import Salles from "./Salles";
-import Classes from "./Classes";
+import Groupes from "./Groupes";
 
 const { Step } = Steps;
 const steps = [
@@ -28,7 +28,7 @@ const steps = [
     content: 'Last-content',
   },
   {
-    title: 'Classes',
+    title: 'Groupes',
     content: 'Last-content',
   },
   {
@@ -48,7 +48,7 @@ function FormHolder(props) {
     } else if (current === 3) {
       return <Matieres />;
     }else if (current === 4) {
-      return <Classes />;
+      return <Groupes />;
     } else if (current === 5) {
       return <Salles />;
     }

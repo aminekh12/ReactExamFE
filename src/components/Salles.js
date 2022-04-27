@@ -37,27 +37,27 @@ function Salles(props) {
                   <Form.Item
                     className={styles.space11}
                     {...restField}
-                    name={[name, 'first']}
-                    rules={[{ required: true, message: 'entrer le nom de la matière !' }]}
+                    name="Nomsalle"
+                    rules={[{ required: true, message: 'entrer le nom de la salle !' }]}
                   >
                     <Input placeholder="nom de salle" />
                   </Form.Item>
                   <Form.Item  {...restField} className={styles.space3}>
-                    <Select placeholder="type de salle">
-                      <Select.Option value="filiers">informatique</Select.Option>
-                      <Select.Option value="filiers">electronique</Select.Option>
-                      <Select.Option value="filiers">normale</Select.Option>
+                    <Select name="Typesalle" placeholder="type de salle">
+                      <Select.Option value="informatique">informatique</Select.Option>
+                      <Select.Option value="electronique">electronique</Select.Option>
+                      <Select.Option value="normale">normale</Select.Option>
                     </Select>
                   </Form.Item>
                   <Form.Item
                     {...formItemLayout}
                   >
-                    <InputNumber placeholder="places" min={1} />
+                    <InputNumber name="places" placeholder="places" min={1} />
                   </Form.Item>
                   <Form.Item
                     {...formItemLayout}
                   >
-                    <InputNumber placeholder="etage" min={1} />
+                    <InputNumber name="etage" placeholder="etage" min={1} />
                   </Form.Item>
 
                   <MinusCircleOutlined onClick={() => remove(name)} className={styles.dynamic_delete_button} />

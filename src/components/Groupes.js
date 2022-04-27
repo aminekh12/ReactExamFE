@@ -90,8 +90,8 @@ class EditableTable extends React.Component {
         super(props);
         this.columns = [
             {
-                title: 'nom de classe',
-                dataIndex: 'nom',
+                title: 'nom de group',
+                dataIndex: 'nomGroup',
                 width: '30%',
                 editable: true,
 
@@ -116,16 +116,16 @@ class EditableTable extends React.Component {
             dataSource: [
                 {
                     key: '0',
-                    nom: '1',
+                    nomGroup: '1',
                     nbrEtudiant: '32',
                 },
                 {
                     key: '1',
-                    nom: '2',
+                    nomGroup: '2',
                     nbrEtudiant: '20',
                 },
             ],
-            count: 2,
+            count: 3,
         };
     }
 
@@ -139,7 +139,7 @@ class EditableTable extends React.Component {
         const { count, dataSource } = this.state;
         const newData = {
             key: count,
-            nom: `${count}`,
+            nomGroup: `${count}`,
             nbrEtudiant: '0',
 
         };
@@ -185,14 +185,16 @@ class EditableTable extends React.Component {
         return (
             <div>
                 <Select
+                    name="Nomniveau"
                     placeholder="Niveaux"
                     style={{
                         marginTop: 30,
-                        width : 190,
+                        width: 190,
                     }}>
-                    <Select.Option value="filiers">Niveau 1</Select.Option>
+                    <Select.Option value="niveau1">Niveau 1</Select.Option>
                 </Select>
                 <Table
+                    pagination={false}
                     components={components}
                     rowClassName={() => 'editable-row'}
                     bordered
@@ -203,14 +205,20 @@ class EditableTable extends React.Component {
                     }}
                 />
                 <Button
+
                     onClick={this.handleAdd}
                     type="primary"
                     style={{
-                        marginBottom: 16,
+                        margin: 16,
                     }}
                 >
-                    Ajouter un classe
+                    Ajouter un Groupe
                 </Button>
+                <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Insérer
+          </Button>
+        </Form.Item>
             </div>
         );
     }
