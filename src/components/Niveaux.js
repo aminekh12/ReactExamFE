@@ -30,36 +30,29 @@ function niveaux(props) {
 
             <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off">
                 <Form.Item label="Filiére :" className={styles.inpu}>
-                    <Select>
-                        <Select.Option value="filiers">fillier 14</Select.Option>
+                    <Select name="Nomfiliere">
+                        <Select.Option value="filier14">fillier 14</Select.Option>
                     </Select>
                 </Form.Item>
                 <Form.List name="users">
                     {(fields, { add, remove }) => (
                         <>
                             {fields.map(({ key, name, ...restField }) => (
-                                <Space key={key} style={{ display: 'flex', marginBottom: 8 ,  margin : 'auto' }} align="baseline"  >
+                                <Space key={key} style={{ display: 'flex', marginBottom: 8, margin: 'auto' }} align="baseline"  >
                                     <Form.Item
                                         className={styles.space1}
                                         {...restField}
-                                        name={[name, 'first']}
+                                        name="nom"
                                         rules={[{ required: true, message: 'entrer le nom de niveau !' }]}
                                     >
                                         <Input placeholder="nom de niveau" />
                                     </Form.Item>
-                                    <Form.Item
-                                        className={styles.space2}
-                                        {...restField}
-                                        name={[name, 'last']}
-                                        rules={[{ required: true, message: 'entrer le nombre des classes' }]}
-                                    >
-                                        <Input placeholder="nombre des classes" />
-                                    </Form.Item>
+
                                     <MinusCircleOutlined onClick={() => remove(name)} className={styles.dynamic_delete_button} />
                                 </Space>
                             ))}
                             <Form.Item>
-                                <Button className={styles.inp} type="dashed" onClick={() => add()}  icon={<PlusOutlined />}>
+                                <Button className={styles.inp} type="dashed" onClick={() => add()} icon={<PlusOutlined />}>
                                     Ajouter un niveau
                                 </Button>
                             </Form.Item>
@@ -68,7 +61,7 @@ function niveaux(props) {
                 </Form.List>
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
-                    Insérer
+                        Insérer
                     </Button>
                 </Form.Item>
             </Form>

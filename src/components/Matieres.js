@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Homepage.module.css";
 
-import { Form, Input, Button, Select, Space,InputNumber } from 'antd';
+import { Form, Input, Button, Select, Space, InputNumber } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 const formItemLayout = {
     labelCol: {
@@ -30,8 +30,8 @@ function Matiers(props) {
 
             <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off">
                 <Form.Item label="niveau :" className={styles.inpu}>
-                    <Select>
-                        <Select.Option value="filiers">niveau 12</Select.Option>
+                    <Select name ="niveau">
+                        <Select.Option value="niveau12">niveau 12</Select.Option>
                     </Select>
                 </Form.Item>
                 <Form.List name="users">
@@ -42,23 +42,22 @@ function Matiers(props) {
                                     <Form.Item
                                         className={styles.space1}
                                         {...restField}
-                                        name={[name, 'first']}
                                         rules={[{ required: true, message: 'entrer le nom de la matière !' }]}
                                     >
-                                        <Input placeholder="nom de la matière" />
+                                        <Input name="Nommatiere" placeholder="nom de la matière" />
                                     </Form.Item>
-                                    <Form.Item  {...restField} className={styles.space3}>
-                                        <Select placeholder="type de salle">
-                                            <Select.Option value="filiers">informatique</Select.Option>
-                                            <Select.Option value="filiers">electronique</Select.Option>
-                                            <Select.Option value="filiers">normale</Select.Option>
+                                    <Form.Item   className={styles.space3}>
+                                        <Select name="type" placeholder="type de salle">
+                                            <Select.Option value="informatique">informatique</Select.Option>
+                                            <Select.Option value="electronique">electronique</Select.Option>
+                                            <Select.Option value="normale">normale</Select.Option>
                                         </Select>
                                     </Form.Item>
-                                    <Form.Item  className={styles.dropboxprof}>
-                                    <Select placeholder="Professeur :">
-                                        <Select.Option value="filiers">niveau 12</Select.Option>
-                                    </Select>
-                                </Form.Item>
+                                    <Form.Item className={styles.dropboxprof}>
+                                        <Select name="Nomprofesseur" placeholder="Professeur">
+                                            <Select.Option value="prof1">prof 1</Select.Option>
+                                        </Select>
+                                    </Form.Item>
 
                                     <MinusCircleOutlined onClick={() => remove(name)} className={styles.dynamic_delete_button} />
                                 </Space>
@@ -73,7 +72,7 @@ function Matiers(props) {
                 </Form.List>
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
-                    Insérer
+                        Insérer
                     </Button>
                 </Form.Item>
             </Form>

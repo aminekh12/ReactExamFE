@@ -55,7 +55,7 @@ function filieres(props) {
                                                 ]}
                                                 noStyle
                                             >
-                                                <Input placeholder="Nom de filière ici" className={styles.inpu} />
+                                                <Input name="nom" placeholder="Nom de filière ici" className={styles.inpu} />
                                             </Form.Item>
                                             {fields.length > 1 ? (
                                                 <MinusCircleOutlined
