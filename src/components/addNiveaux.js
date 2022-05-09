@@ -20,7 +20,7 @@ const formItemLayoutWithOutLabel = {
     },
 };
 function niveaux(props) {
-    const onFinish = values => {
+    const onFinish = values => {    
         console.log('Received values of form:', values);
     };
     return (

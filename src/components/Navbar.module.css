@@ -2,10 +2,7 @@
     line-height: 100px;
 }
 
-.logo {
-    height: 80px;
-    margin: 20px 50px;
-}
+
 
 .right {
     float: right;
@@ -22,4 +19,26 @@
   }
   .btn1:hover {
     background: #5d4eff;
+  }
+.trigger {
+    padding: 0 24px;
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+ .trigger:hover {
+    color: #1890ff;
+  }
+  
+  .logo {
+    height: 60px;
+
+    padding-left: 20px;
+
+  }
+  
+  .sitelayout .sitelayoutbackground {
+    background: #fff;
   }
