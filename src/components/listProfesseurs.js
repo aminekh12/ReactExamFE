@@ -1,208 +1,123 @@
-
+import React, { useState } from "react";
 import styles from "./Homepage.module.css";
-import React, { useContext, useState, useEffect, useRef } from 'react';
-import { Table, Input, Button, Popconfirm, Form } from 'antd';
-const EditableContext = React.createContext(null);
+import { Button, Tooltip, Modal, Form, Input,message } from 'antd';
+import { EditOutlined, UserDeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import Professeurs from "./addProfesseurs";
 
-const EditableRow = ({ index, ...props }) => {
-  const [form] = Form.useForm();
+function ListProfesseurs(props) {
+  const success = (mess) => {
+    message.success('Professeur ' + mess + ' avec succès !');
+  };
+  const error = () => {
+    message.error('Opération annuler');
+  };
+  const [visibleAdd, setVisibleAdd] = useState(false)
+  const [visibleMod, setVisibleMod] = useState(false)
+  const showModalMod = () => {
+    setVisibleMod(true);
+  };
+  const showModalAdd = () => {
+    setVisibleAdd(true);
+  };
+  const handleOkMod = () => {
+    setVisibleMod(false);
+    success("Modifier");
+  };
+  const handleOkAdd = () => {
+    setVisibleAdd(false);
+    success("Ajouter");
+  };
+
+  const handleCancel = () => {
+    setVisibleAdd(false);
+    setVisibleMod(false);
+    error();
+  };
   return (
-    <Form form={form} component={false}>
-      <EditableContext.Provider value={form}>
-        <tr {...props} />
-      </EditableContext.Provider>
-    </Form>
-  );
-};
+    <div>
+      <table>
+        <tr>
+          <th class={styles.id}>ID Professeur</th>
+          <th class={styles.name}>Nom Complete</th>
+          <th class={styles.action}>Actions</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Maria Anders</td>
+          <td ><Tooltip title="Modifier" >
+            <Button class={styles.icon1} onClick={showModalMod} type="primary" shape="circle" icon={<EditOutlined />} />
+          </Tooltip><Tooltip title="Supprimer">
+              <Button type="primary" shape="circle" icon={<UserDeleteOutlined />} />
+            </Tooltip></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Francisco Chang</td>
+          <td ><Tooltip title="Modifier" >
+            <Button class={styles.icon1} onClick={showModalMod} type="primary" shape="circle" icon={<EditOutlined />} />
+          </Tooltip><Tooltip title="Supprimer">
+              <Button type="primary" shape="circle" icon={<UserDeleteOutlined />} />
+            </Tooltip></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Roland Mendel</td>
+          <td ><Tooltip title="Modifier" >
+            <Button class={styles.icon1} onClick={showModalMod} type="primary" shape="circle" icon={<EditOutlined />} />
+          </Tooltip><Tooltip title="Supprimer">
+              <Button type="primary" shape="circle" icon={<UserDeleteOutlined />} />
+            </Tooltip></td>
+        </tr>
+      </table>
+      <Button type="dashed" icon={<PlusOutlined />} onClick={showModalAdd}>
+        Ajouter un professeur
+      </Button>
+      <Modal
+        visible={visibleAdd}
+        title="Ajouter Professeurs"
+        onOk={handleOkAdd}
+        onCancel={handleCancel}
+        width={1000}
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            Annuler
+          </Button>,
+          <Button key="submit" type="primary" onClick={handleOkAdd}>
+            Terminer
+          </Button>,
 
-const EditableCell = ({
-  title,
-  editable,
-  children,
-  dataIndex,
-  record,
-  handleSave,
-  ...restProps
-}) => {
-  const [editing, setEditing] = useState(false);
-  const inputRef = useRef(null);
-  const form = useContext(EditableContext);
-  useEffect(() => {
-    if (editing) {
-      inputRef.current.focus();
-    }
-  }, [editing]);
-
-  const toggleEdit = () => {
-    setEditing(!editing);
-    form.setFieldsValue({
-      [dataIndex]: record[dataIndex],
-    });
-  };
-
-  const save = async () => {
-    try {
-      const values = await form.validateFields();
-      toggleEdit();
-      handleSave({ ...record, ...values });
-    } catch (errInfo) {
-      console.log('Save failed:', errInfo);
-    }
-  };
-
-  let childNode = children;
-
-  if (editable) {
-    childNode = editing ? (
-      <Form.Item
-        style={{
-          margin: 0,
-        }}
-        name={dataIndex}
-        rules={[
-          {
-            required: true,
-            message: `${title} is required.`,
-          },
         ]}
       >
-        <Input ref={inputRef} onPressEnter={save} onBlur={save} />
-      </Form.Item>
-    ) : (
-      <div
-        className="editable-cell-value-wrap"
-        style={{
-          paddingRight: 24,
-        }}
-        onClick={toggleEdit}
+        <Professeurs />
+      </Modal>
+      <Modal
+        visible={visibleMod}
+        title="Modifer Professeur"
+        onOk={handleOkMod}
+        onCancel={handleCancel}
+        width={550}
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            Annuler
+          </Button>,
+          <Button key="submit" type="primary" onClick={handleOkMod}>
+            Modifier
+          </Button>,
+
+        ]}
       >
-        {children}
-      </div>
-    );
-  }
+        <Form name="nest-messages" validateMessages={'Nom obligatoir'}>
+          <Form.Item name={"nomProfesseur"} label="Nom professeur" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+        </Form>
 
-  return <td {...restProps}>{childNode}</td>;
-};
+      </Modal>
+    </div >
 
-class EditableTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this.columns = [
-      {
-        title: 'id',
-        dataIndex: 'id',
-        width: '10%',
-        editable: true,
-      },
-      {
-        title: 'Nom Complet',
-        dataIndex: 'NomComplet',
-        editable: true,
-      },
-      {
-        title: 'operation',
-        dataIndex: 'operation',
-        render: (_, record) =>
-          this.state.dataSource.length >= 1 ? (
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-              <a>Delete</a>
-            </Popconfirm>
-          ) : null,
-      },
-    ];
-    this.state = {
-      dataSource: [
-        {
-          key: '0',
-          id: '1',
-          NomComplet: 'Goudimi Abdellah',
 
-        },
-        {
-          key: '1',
-          id: '2',
-          NomComplet: 'Amine Khatmi',
 
-        },
-      ],
-      count: 2,
-    };
-  }
-
-  handleDelete = (key) => {
-    const dataSource = [...this.state.dataSource];
-    this.setState({
-      dataSource: dataSource.filter((item) => item.key !== key),
-    });
-  };
-  handleAdd = () => {
-    const { count, dataSource } = this.state;
-    const newData = {
-      key: count,
-      id: ` ${count}`,
-      NomComplet: `Nom Complet ${count}`,
-
-    };
-    this.setState({
-      dataSource: [...dataSource, newData],
-      count: count + 1,
-    });
-  };
-  handleSave = (row) => {
-    const newData = [...this.state.dataSource];
-    const index = newData.findIndex((item) => row.key === item.key);
-    const item = newData[index];
-    newData.splice(index, 1, { ...item, ...row });
-    this.setState({
-      dataSource: newData,
-    });
-  };
-
-  render() {
-    const { dataSource } = this.state;
-    const components = {
-      body: {
-        row: EditableRow,
-        cell: EditableCell,
-      },
-    };
-    const columns = this.columns.map((col) => {
-      if (!col.editable) {
-        return col;
-      }
-
-      return {
-        ...col,
-        onCell: (record) => ({
-          record,
-          editable: col.editable,
-          dataIndex: col.dataIndex,
-          title: col.title,
-          handleSave: this.handleSave,
-        }),
-      };
-    });
-    return (
-      <div>
-        <Button
-          onClick={this.handleAdd}
-          type="primary"
-          style={{
-            marginBottom: 16,
-          }}
-        >
-          Ajouter un professeur
-        </Button>
-        <Table
-          components={components}
-          rowClassName={() => 'editable-row'}
-          bordered
-          dataSource={dataSource}
-          columns={columns}
-        />
-      </div>
-    );
-  }
+  );
 }
 
-export default () => <EditableTable />;
+export default ListProfesseurs;

@@ -13,12 +13,7 @@ const formItemLayout = {
     sm: { span: 20 },
   },
 };
-const formItemLayoutWithOutLabel = {
-  wrapperCol: {
-    xs: { span: 24, offset: 0 },
-    sm: { span: 20, offset: 4 },
-  },
-};
+
 function Salles(props) {
   const onFinish = values => {
     console.log('Received values of form:', values);
