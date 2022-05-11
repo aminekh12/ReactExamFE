@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import React,{ useState,useEffect,useRef } from "react";
 import styles from "./Homepage.module.css";
 import axios from "axios";
+=======
+import React from "react";
+import styles from "./Homepage.module.css";
+
+>>>>>>> origin/master
 import { Form, Input, Button, Select, Space, InputNumber } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 const formItemLayout = {
@@ -13,6 +19,7 @@ const formItemLayout = {
     sm: { span: 20 },
   },
 };
+<<<<<<< HEAD
 const formItemLayoutWithOutLabel = {
   wrapperCol: {
     xs: { span: 24, offset: 0 },
@@ -79,6 +86,10 @@ const Salles=(props)=> {
       })
       console.log('Received values of form:------------', state);
   }
+=======
+
+function Salles(props) {
+>>>>>>> origin/master
   const onFinish = values => {
     console.log('Received values of form:', values);
   };
@@ -99,22 +110,40 @@ const Salles=(props)=> {
                     name="Nomsalle"
                     rules={[{ required: true, message: 'entrer le nom de la salle !' }]}
                   >
+<<<<<<< HEAD
                     <Input placeholder="nom de salle"  onChange={changehandlernomsalle} onBlur={changehandlernomsalle}/>
                   </Form.Item>
                   <Form.Item  {...restField} className={styles.space3}>
                   <Select placeholder="type de salle" onChange={changehandlertypesalle}>
                     {salle.map((salle)=><Select.Option selected={0} key={salle.id} value={salle.id}>{salle.TypeSalle}</Select.Option>)}
+=======
+                    <Input placeholder="nom de salle" />
+                  </Form.Item>
+                  <Form.Item  {...restField} className={styles.space3}>
+                    <Select name="Typesalle" placeholder="type de salle">
+                      <Select.Option value="informatique">informatique</Select.Option>
+                      <Select.Option value="electronique">electronique</Select.Option>
+                      <Select.Option value="normale">normale</Select.Option>
+>>>>>>> origin/master
                     </Select>
                   </Form.Item>
                   <Form.Item
                     {...formItemLayout}
                   >
+<<<<<<< HEAD
                     <Input name="places" placeholder="places" min={1}  onChange={changehandlernombreplace} onBlur={changehandlernombreplace}/>
+=======
+                    <InputNumber name="places" placeholder="places" min={1} />
+>>>>>>> origin/master
                   </Form.Item>
                   <Form.Item
                     {...formItemLayout}
                   >
+<<<<<<< HEAD
                     <Input name="etage" placeholder="etage" min={1} onChange={changehandleretage} onBlur={changehandleretage} />
+=======
+                    <InputNumber name="etage" placeholder="etage" min={1} />
+>>>>>>> origin/master
                   </Form.Item>
 
                   <MinusCircleOutlined onClick={() => remove(name)} className={styles.dynamic_delete_button} />
@@ -129,7 +158,11 @@ const Salles=(props)=> {
           )}
         </Form.List>
         <Form.Item>
+<<<<<<< HEAD
           <Button type="primary" htmlType="submit" onClick={insert}>
+=======
+          <Button type="primary" htmlType="submit">
+>>>>>>> origin/master
             Insérer
           </Button>
         </Form.Item>
@@ -141,7 +174,11 @@ const Salles=(props)=> {
   );
 }
 
+<<<<<<< HEAD
 export default Salles;
 
 
 
+=======
+export default Salles;
+>>>>>>> origin/master
