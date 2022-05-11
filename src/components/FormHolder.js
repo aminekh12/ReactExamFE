@@ -3,10 +3,10 @@ import 'antd/dist/antd.css';
 import styles from "./Form.module.css";
 import { Steps, Button, message } from 'antd';
 import Filieres from "./Filieres";
-import Niveaux from "./Niveaux";
-import Matieres from "./Matieres";
-import Professeurs from "./Professeurs";
-import Salles from "./Salles";
+import Niveaux from "./addNiveaux";
+import Matieres from "./addMatieres";
+import Professeurs from "./addProfesseurs";
+import Salles from "./addSalles";
 import Groupes from "./Groupes";
 
 const { Step } = Steps;

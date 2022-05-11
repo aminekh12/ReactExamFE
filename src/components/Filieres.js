@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState,useEffect,useRef } from "react";
+import axios from "axios";
 import styles from "./Homepage.module.css";
 
 import { Form, Input, Button } from 'antd';
@@ -19,7 +20,31 @@ const formItemLayoutWithOutLabel = {
         sm: { span: 20, offset: 4 },
     },
 };
-function filieres(props) {
+const Filieres=(props)=> {
+    const [state, setState] = useState({ nomfiliere: "Michael"});
+    const firstTimeRender = useRef(true);
+
+    useEffect(() => {
+    if (!firstTimeRender.current) {
+        console.log(state);
+    }
+    }, [state])
+
+    useEffect(() => { 
+    firstTimeRender.current = false 
+    }, [])
+    function changehandler(e){
+        setState({nomfiliere :e});
+    
+    }
+    function insert(){
+        axios.post("http://127.0.0.1:8000/api/filiere/insert",  state)
+        .then(response=>{
+            console.log(response,state);
+        }).catch(error=>{
+            console.log(error);
+        })
+    }
     const onFinish = values => {
         console.log('Received values of form:', values);
     };
@@ -28,11 +53,9 @@ function filieres(props) {
         <div className={styles.container}>
             <div className="display-5 text-center  text-secondary">Menu des filières</div>
             <div >
-                <form action="#" method="post" className="   p-2">
                     <Form name="dynamic_form_item" {...formItemLayoutWithOutLabel} onFinish={onFinish}>
                         <Form.List
                             name="names"
-
                         >
                             
                             {(fields, { add, remove }, { errors }) => (
@@ -55,7 +78,7 @@ function filieres(props) {
                                                 ]}
                                                 noStyle
                                             >
-                                                <Input name="nom" placeholder="Nom de filière ici" className={styles.inpu} />
+                                                <Input name="nom" placeholder="Nom de filière ici" className={styles.inpu} onChange={(e) => { changehandler(e.target.value); }} onBlur={(e) => { changehandler(e.target.value); }} />
                                             </Form.Item>
                                             {fields.length > 1 ? (
                                                 <MinusCircleOutlined
@@ -81,13 +104,11 @@ function filieres(props) {
                             )}
                         </Form.List>
                         <Form.Item>
-                            <Button className={styles.inputt}  type="primary" htmlType="submit">
+                            <Button className={styles.inputt}  type="primary" htmlType="submit" onClick={insert}>
                             Insérer
                             </Button>
                         </Form.Item>
                     </Form>
-
-                </form>
             </div>
 
 
@@ -96,4 +117,4 @@ function filieres(props) {
     );
 }
 
-export default filieres;
+export default Filieres;

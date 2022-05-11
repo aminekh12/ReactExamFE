@@ -1,6 +1,6 @@
-import React from "react";
+import React,{ useState,useEffect,useRef } from "react";
 import styles from "./Homepage.module.css";
-
+import axios from "axios";
 import { Form, Input, Button, Select, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 const formItemLayout = {
@@ -19,7 +19,57 @@ const formItemLayoutWithOutLabel = {
         sm: { span: 20, offset: 4 },
     },
 };
-function niveaux(props) {
+const Niveaux=(props)=> {
+    const [state, setState] = useState({nomniveau:"",idfiliere:""});
+    const [selectedFiliere,setSelectedFiliere] = useState(["0"]);
+    const [nomfilieres, setNomfilieres] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+    
+    const fetchData=()=>{
+        axios.get("http://127.0.0.1:8000/api/filiere/getAll")
+        .then((response) => {
+            setIsLoading(false);
+            setNomfilieres(response.data);
+            console.log(response.data)
+          })
+          .catch((error) => {
+            setIsLoading(false);
+            setIsError(true);
+            console.log(error);
+          });
+    }
+    useEffect(() => {
+        fetchData();
+       // console.log("Value of Selected filiere in State is: ", selectedFiliere.nomfiliere);
+      }, [selectedFiliere]);
+      if (isLoading) {
+        alert(nomfilieres)
+      }
+    function changehandlernomfiliere(event){
+        setSelectedFiliere({idfilliere :event});
+        setState({nomniveau :state.nomniveau,idfiliere:selectedFiliere.idfilliere});
+        console.log("Value  in State is: ", state );
+        
+        
+    }
+    function changehandlernomniveau(e){
+        setState({nomniveau :e.target.value,idfiliere:selectedFiliere.idfilliere});
+        
+        console.log("Value of nomniveau in State is: ", state );
+    
+    }
+ 
+    function insert(){
+        console.log(state)
+        axios.post("http://127.0.0.1:8000/api/niveau/insert", state)
+        .then(response=>{
+            console.log(response,state);
+        }).catch(error=>{
+            console.log(error);
+        })
+        console.log('Received values of form:', state);
+    }
     const onFinish = values => {
         console.log('Received values of form:', values);
     };
@@ -30,8 +80,8 @@ function niveaux(props) {
 
             <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off">
                 <Form.Item label="Filiére :" className={styles.inpu}>
-                    <Select name="Nomfiliere">
-                        <Select.Option value="filier14">fillier 14</Select.Option>
+                    <Select   onChange={changehandlernomfiliere} >
+                    {nomfilieres.map((nomfiliere)=><Select.Option selected={0} key={nomfiliere.id} value={nomfiliere.id}>{nomfiliere.nomfiliere}</Select.Option>)}
                     </Select>
                 </Form.Item>
                 <Form.List name="users">
@@ -45,7 +95,7 @@ function niveaux(props) {
                                         name="nom"
                                         rules={[{ required: true, message: 'entrer le nom de niveau !' }]}
                                     >
-                                        <Input placeholder="nom de niveau" />
+                                        <Input placeholder="nom de niveau"  onBlur={changehandlernomniveau} onInput={changehandlernomniveau} />
                                     </Form.Item>
 
                                     <MinusCircleOutlined onClick={() => remove(name)} className={styles.dynamic_delete_button} />
@@ -60,7 +110,7 @@ function niveaux(props) {
                     )}
                 </Form.List>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" onClick={insert}>
                         Insérer
                     </Button>
                 </Form.Item>
@@ -72,4 +122,4 @@ function niveaux(props) {
     );
 }
 
-export default niveaux;
+export default Niveaux;

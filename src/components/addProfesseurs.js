@@ -1,4 +1,5 @@
-import React from "react";
+import React,{ useState,useEffect,useRef } from "react";
+import axios from "axios";
 import styles from "./Homepage.module.css";
 
 import { Form, Input, Button} from 'antd';
@@ -64,7 +65,28 @@ const options = [
     },
 ];
 
-function Professeurs(props) {
+const Professeurs=(props)=> {
+    const [state, setState] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+
+    function changehandler(e){
+        setState({nom :e.target.value,prenom :e.target.value});
+        console.log("Value of nomniveau in State is: ", state );
+    
+    }
+ 
+    function insert(){
+        console.log(state)
+        axios.post("http://127.0.0.1:8000/api/professeur/insert", state)
+        .then(response=>{
+            console.log(response,state);
+        }).catch(error=>{
+            console.log(error);
+        })
+        console.log('Received values of form:', state);
+    }
+
 
     const onChange = value => {
         console.log(value);
@@ -74,7 +96,7 @@ function Professeurs(props) {
         <div className={styles.container}>
             <div className="display-5 text-center  text-secondary" >Menu des Professeurs</div>
             <div >
-                <form action="#" method="post" className="   p-2">
+               
                     <Form name="dynamic_form_item" {...formItemLayoutWithOutLabel} >
                         <Form.List
                             name="names"
@@ -101,7 +123,7 @@ function Professeurs(props) {
                                                 ]}
                                                 noStyle
                                             >
-                                                <Input placeholder="Nom de professeur ici" name="nom" className={styles.inpu} />
+                                                <Input placeholder="Nom de professeur ici" name="nom" className={styles.inpu} onChange={changehandler} onBlur={changehandler} />
                                             </Form.Item>
                                             {fields.length > 1 ? (
                                                 <MinusCircleOutlined
@@ -127,13 +149,11 @@ function Professeurs(props) {
                             )}
                         </Form.List>
                         <Form.Item>
-                            <Button className={styles.inputt}  type="primary" htmlType="submit">
+                            <Button className={styles.inputt}  type="primary" htmlType="submit" onClick={insert}>
                             Insérer
                             </Button>
                         </Form.Item>
                     </Form>
-
-                </form>
             </div>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
