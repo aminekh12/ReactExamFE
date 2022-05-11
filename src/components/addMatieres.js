@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 import React,{ useState,useEffect,useRef } from "react";
 import styles from "./Homepage.module.css";
 import axios from "axios";
-=======
-import React from "react";
-import styles from "./Homepage.module.css";
->>>>>>> origin/master
+
 
 import { Form, Input, Button, Select, Space, InputNumber } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
@@ -25,7 +21,6 @@ const formItemLayoutWithOutLabel = {
         sm: { span: 20, offset: 4 },
     },
 };
-<<<<<<< HEAD
 const Matiere=(props)=> {
     const [state, setState] = useState();
     
@@ -81,7 +76,7 @@ const Matiere=(props)=> {
     useEffect(() => {
         fetchData();
        // console.log("Value of Selected filiere in State is: ", selectedFiliere.nomfiliere);
-      }, [selectedniveau]);
+      }, [selectedniveau,selectedtypesalle,selectednomprofesseur]);
       if (isLoading) {
         alert(selectedniveau)
       }
@@ -90,7 +85,9 @@ const Matiere=(props)=> {
         setSelectedNiveau({idniveau :event});
     }
     function changehandlernommatiere(event){
+        //console.log(event.target.value)
         setSelectednommatiere({matiere :event.target.value});
+        console.log(nommatiere)
 
     }
     function changehandlertypesalle(event){
@@ -101,7 +98,8 @@ const Matiere=(props)=> {
     }
  
     function insert(){
-        setState({ matiere:nommatiere.nommatiere, typesalle:selectedtypesalle.typesalle, idprofesseur:selectednomprofesseur.idprofesseur, idniveau:selectedniveau.idniveau})
+        setState({ matiere:nommatiere.matiere, typesalle:selectedtypesalle.typesalle, idprofesseur:selectednomprofesseur.idprofesseur, idniveau:selectedniveau.idniveau})
+        console.log(state)
         axios.post("http://127.0.0.1:8000/api/matiere/insert", state)
         .then(response=>{
             console.log(response,state);
@@ -110,12 +108,6 @@ const Matiere=(props)=> {
         })
         console.log('Received values of form:------------', state);
     }
-=======
-function Matiers(props) {
-    const onFinish = values => {
-        console.log('Received values of form:', values);
-    };
->>>>>>> origin/master
     return (
 
         <div className={styles.container}>
@@ -123,13 +115,8 @@ function Matiers(props) {
 
             <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off">
                 <Form.Item label="niveau :" className={styles.inpu}>
-<<<<<<< HEAD
                     <Select onSelect={changehandlernomniveau} >
                     {niveau.map((niveau)=><Select.Option  key={niveau.id} value={niveau.id}>{niveau.nomniveau}</Select.Option>)}
-=======
-                    <Select name ="niveau">
-                        <Select.Option value="niveau12">niveau 12</Select.Option>
->>>>>>> origin/master
                     </Select>
                 </Form.Item>
                 <Form.List name="users">
@@ -142,7 +129,6 @@ function Matiers(props) {
                                         {...restField}
                                         rules={[{ required: true, message: 'entrer le nom de la matière !' }]}
                                     >
-<<<<<<< HEAD
                                         <Input name="Nommatiere" placeholder="nom de la matière"  onChange={changehandlernommatiere} onBlur={changehandlernommatiere} />
                                     </Form.Item>
                                     <Form.Item   className={styles.space3}>
@@ -153,20 +139,6 @@ function Matiers(props) {
                                     <Form.Item className={styles.dropboxprof}>
                                         <Select placeholder="Professeur :"  onChange={changehandlernomprofesseur} >
                                             {professeur.map((professeur)=><Select.Option selected={0} key={professeur.id} value={professeur.id}>{professeur.nom+" "+professeur.prenom}</Select.Option>)}
-=======
-                                        <Input name="Nommatiere" placeholder="nom de la matière" />
-                                    </Form.Item>
-                                    <Form.Item   className={styles.space3}>
-                                        <Select name="type" placeholder="type de salle">
-                                            <Select.Option value="informatique">informatique</Select.Option>
-                                            <Select.Option value="electronique">electronique</Select.Option>
-                                            <Select.Option value="normale">normale</Select.Option>
-                                        </Select>
-                                    </Form.Item>
-                                    <Form.Item className={styles.dropboxprof}>
-                                        <Select name="Nomprofesseur" placeholder="Professeur">
-                                            <Select.Option value="prof1">prof 1</Select.Option>
->>>>>>> origin/master
                                         </Select>
                                     </Form.Item>
 
@@ -182,11 +154,7 @@ function Matiers(props) {
                     )}
                 </Form.List>
                 <Form.Item>
-<<<<<<< HEAD
                     <Button type="primary" htmlType="submit" onClick={insert}>
-=======
-                    <Button type="primary" htmlType="submit">
->>>>>>> origin/master
                         Insérer
                     </Button>
                 </Form.Item>
@@ -198,8 +166,4 @@ function Matiers(props) {
     );
 }
 
-<<<<<<< HEAD
 export default Matiere;
-=======
-export default Matiers;
->>>>>>> origin/master

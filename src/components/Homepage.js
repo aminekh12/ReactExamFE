@@ -43,9 +43,9 @@ function SiderDemo(props) {
     } else if (selectedMenuItem === 4) {
       return <Niveaux />;
     } else if (selectedMenuItem === 5) {
-      return <Matieres />;
-    } else if (selectedMenuItem === 6) {
       return <Groupes />;
+    } else if (selectedMenuItem === 6) {
+      return <Matieres />;
     } else if (selectedMenuItem === 7) {
       return <Salles />;
     }

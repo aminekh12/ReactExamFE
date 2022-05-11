@@ -19,7 +19,6 @@ const formItemLayoutWithOutLabel = {
         sm: { span: 20, offset: 4 },
     },
 };
-<<<<<<< HEAD
 const Niveaux=(props)=> {
     const [state, setState] = useState({nomniveau:"",idfiliere:""});
     const [selectedFiliere,setSelectedFiliere] = useState(["0"]);
@@ -72,10 +71,6 @@ const Niveaux=(props)=> {
         console.log('Received values of form:', state);
     }
     const onFinish = values => {
-=======
-function niveaux(props) {
-    const onFinish = values => {    
->>>>>>> origin/master
         console.log('Received values of form:', values);
     };
     return (

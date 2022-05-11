@@ -2,20 +2,12 @@ import React, { useState } from "react";
 import 'antd/dist/antd.css';
 import styles from "./Form.module.css";
 import { Steps, Button, message } from 'antd';
-<<<<<<< HEAD
-import Filieres from "./Filieres";
-=======
 import Filieres from "./addFilieres";
->>>>>>> origin/master
 import Niveaux from "./addNiveaux";
 import Matieres from "./addMatieres";
 import Professeurs from "./addProfesseurs";
 import Salles from "./addSalles";
-<<<<<<< HEAD
-import Groupes from "./Groupes";
-=======
 import Groupes from "./addGroupes";
->>>>>>> origin/master
 
 const { Step } = Steps;
 const steps = [
